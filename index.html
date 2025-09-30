@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delia Glavan – Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+
+      .fade-in {
+        animation: fadeIn 0.8s ease-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .nav-link {
+        position: relative;
+        transition: color 0.3s ease;
+      }
+
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: currentColor;
+        transition: width 0.3s ease;
+      }
+
+      .nav-link:hover::after {
+        width: 100%;
+      }
+
+      .section-header {
+        position: relative;
+        display: inline-block;
+        padding-bottom: 12px;
+      }
+
+      .section-header::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 4px;
+        border-radius: 2px;
+      }
+
+      .section-header.red::after {
+        background: linear-gradient(to right, #dc2626, #ef4444);
+      }
+
+      .section-header.green::after {
+        background: linear-gradient(to right, #15803d, #22c55e);
+      }
+
+      .section-header.blue::after {
+        background: linear-gradient(to right, #1d4ed8, #3b82f6);
+      }
+
+      .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+
+      .slideshow-container {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .slideshow-container img {
+        transition: opacity 0.5s ease-in-out;
+      }
+
+      .arrow {
+        opacity: 0.7;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+
+      .arrow:hover {
+        opacity: 1;
+        transform: scale(1.1);
+      }
+
+      .gradient-text {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      input:focus, textarea:focus {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      }
+
+      @keyframes blob {
+        0% {
+          transform: translate(0px, 0px) scale(1);
+        }
+        33% {
+          transform: translate(30px, -50px) scale(1.1);
+        }
+        66% {
+          transform: translate(-20px, 20px) scale(0.9);
+        }
+        100% {
+          transform: translate(0px, 0px) scale(1);
+        }
+      }
+
+      .animate-blob {
+        animation: blob 7s infinite;
+      }
+
+      .animation-delay-2000 {
+        animation-delay: 2s;
+      }
+
+      .animation-delay-4000 {
+        animation-delay: 4s;
+      }
+
+      @keyframes bounce {
+        0%, 100% {
+          transform: translateY(0) translateX(-50%);
+        }
+        50% {
+          transform: translateY(-10px) translateX(-50%);
+        }
+      }
+
+      .animate-bounce {
+        animation: bounce 2s infinite;
+      }
+    </style>
+  </head>
+  <body class="text-gray-800 bg-gray-50">
+    <!-- Navbar -->
+    <header class="sticky top-0 bg-white/95 backdrop-blur-sm shadow-sm z-50">
+      <nav class="max-w-6xl mx-auto px-4 sm:px-6 py-4 sm:py-5 flex justify-between items-center">
+        <h1 class="text-xl sm:text-2xl font-bold gradient-text">Delia Glavan</h1>
+        <ul class="hidden md:flex space-x-6 lg:space-x-10 text-sm font-medium">
+          <li><a href="#intro" class="nav-link hover:text-blue-600">Home</a></li>
+          <li><a href="#romania" class="nav-link hover:text-red-600">Romania</a></li>
+          <li><a href="#usa" class="nav-link hover:text-green-600">United States</a></li>
+          <li><a href="#sdgs" class="nav-link hover:text-blue-600">SDGs</a></li>
+          <li><a href="#contact" class="nav-link hover:text-purple-600">Contact</a></li>
+        </ul>
+        <!-- Mobile menu button -->
+        <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </nav>
+      <!-- Mobile menu -->
+      <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+        <ul class="flex flex-col space-y-2 px-4 py-4 text-sm font-medium">
+          <li><a href="#intro" class="block py-2 hover:text-blue-600">Home</a></li>
+          <li><a href="#romania" class="block py-2 hover:text-red-600">Romania</a></li>
+          <li><a href="#usa" class="block py-2 hover:text-green-600">United States</a></li>
+          <li><a href="#sdgs" class="block py-2 hover:text-blue-600">SDGs</a></li>
+          <li><a href="#contact" class="block py-2 hover:text-purple-600">Contact</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <!-- Content Wrapper -->
+    <main class="w-full">
+      <!-- Intro -->
+      <section id="intro" class="relative min-h-screen flex items-center justify-center overflow-hidden px-4">
+        <!-- Artistic Background -->
+        <div class="absolute inset-0 bg-gradient-to-br from-rose-50 via-amber-50 to-indigo-100">
+          <div class="absolute inset-0 opacity-20">
+            <div class="absolute top-10 sm:top-20 left-10 sm:left-20 w-48 sm:w-72 lg:w-96 h-48 sm:h-72 lg:h-96 bg-rose-300 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
+            <div class="absolute top-20 sm:top-40 right-10 sm:right-20 w-48 sm:w-72 lg:w-96 h-48 sm:h-72 lg:h-96 bg-amber-300 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
+            <div class="absolute bottom-10 sm:bottom-20 left-20 sm:left-40 w-48 sm:w-72 lg:w-96 h-48 sm:h-72 lg:h-96 bg-indigo-300 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000"></div>
+          </div>
+        </div>
+
+        <div class="relative max-w-4xl mx-auto px-4 sm:px-6 py-16 sm:py-24 fade-in">
+          <div class="mb-8 sm:mb-12 text-left">
+            <p class="text-base sm:text-lg text-gray-600 mb-3 font-light">Hi there! 👋</p>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 text-gray-900 leading-tight">
+              I'm Delia Glavan
+            </h2>
+            <div class="w-16 sm:w-20 h-1 bg-gradient-to-r from-rose-400 via-amber-400 to-indigo-400 mb-6 sm:mb-8"></div>
+          </div>
+          
+          <div class="space-y-4 sm:space-y-6 text-left bg-white/60 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-xl">
+            <p class="text-base sm:text-lg md:text-xl leading-relaxed text-gray-800">
+              Hello! My name is Delia Glavan, I was born and raised in Romania and currently I'm a student at Pace University in New York, double-majoring in Political Science and Peace and Justice Studies, with minors in Theatre for Social Justice and Diplomacy.
+            </p>
+            <p class="text-base sm:text-lg md:text-xl leading-relaxed text-gray-800">
+              As my fields of study are probably able to tell you, I'm interested in seeing how art and politics are intimately connected, and how we can pursue that to further social justice causes.
+            </p>
+            
+            <div class="flex flex-wrap gap-2 sm:gap-3 pt-2 sm:pt-4">
+              <span class="px-3 sm:px-4 py-1.5 sm:py-2 bg-rose-100 rounded-full text-xs sm:text-sm font-medium text-rose-800">🎭 Theatre & Justice</span>
+              <span class="px-3 sm:px-4 py-1.5 sm:py-2 bg-amber-100 rounded-full text-xs sm:text-sm font-medium text-amber-800">✊ Activism</span>
+              <span class="px-3 sm:px-4 py-1.5 sm:py-2 bg-indigo-100 rounded-full text-xs sm:text-sm font-medium text-indigo-800">🌍 Global Advocacy</span>
+            </div>
+          </div>
+
+          <div class="mt-8 sm:mt-10 flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
+            <a href="#romania" class="group px-5 sm:px-6 py-2.5 sm:py-3 bg-gray-900 text-white font-medium rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 text-sm sm:text-base">
+              See my journey
+              <span class="group-hover:translate-x-1 transition-transform duration-300">→</span>
+            </a>
+            <a href="#contact" class="px-5 sm:px-6 py-2.5 sm:py-3 bg-white/90 backdrop-blur-sm text-gray-900 font-medium rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 border-2 border-gray-200 text-center text-sm sm:text-base">
+              Let's connect
+            </a>
+          </div>
+
+          <!-- Scroll Indicator -->
+          <div class="absolute bottom-4 sm:bottom-8 left-4 sm:left-8 text-gray-500 text-xs sm:text-sm font-light animate-bounce">
+            scroll down ↓
+          </div>
+        </div>
+      </section>
+
+      <!-- Romania -->
+      <section id="romania" class="py-12 sm:py-16 md:py-20 px-4 sm:px-6 bg-white">
+        <div class="max-w-5xl mx-auto fade-in">
+          <h2 class="section-header red text-2xl sm:text-3xl md:text-4xl font-bold text-red-700 mb-8 sm:mb-10 md:mb-12">Experience in Romania</h2>
+          <div class="bg-red-50 rounded-xl sm:rounded-2xl p-6 sm:p-8 mb-8 sm:mb-10 md:mb-12 card border-l-4 border-red-600">
+            <p class="text-base sm:text-lg md:text-xl leading-relaxed text-gray-800">
+              <span class="font-bold text-red-900">Ever since I've known myself, I've been a very active person</span> through organizing with the people around me. In middle school and high school, that looked like the <span class="font-semibold text-red-800">Student Representation Movement</span> - from the school level to the national one, then the European one, and finally, a global one through <span class="font-semibold text-red-800">UNESCO's SDG4 Youth and Student Network</span>.
+            </p>
+          </div>
+          
+          <div class="relative slideshow-container max-w-4xl mx-auto rounded-xl sm:rounded-2xl overflow-hidden shadow-lg sm:shadow-xl md:shadow-2xl" data-folder="red">
+            <button class="absolute left-2 sm:left-4 md:left-6 top-1/2 -translate-y-1/2 text-2xl sm:text-3xl text-white bg-red-600/90 hover:bg-red-700 w-10 h-10 sm:w-12 sm:h-12 rounded-full shadow-lg z-10 arrow left flex items-center justify-center">&#10094;</button>
+            <img src="" class="w-full h-auto active-slide" alt="Experience in Romania" style="display: block;" />
+            <button class="absolute right-2 sm:right-4 md:right-6 top-1/2 -translate-y-1/2 text-2xl sm:text-3xl text-white bg-red-600/90 hover:bg-red-700 w-10 h-10 sm:w-12 sm:h-12 rounded-full shadow-lg z-10 arrow right flex items-center justify-center">&#10095;</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- USA -->
+<section id="usa" class="py-20 px-6 bg-gradient-to-br from-green-50 to-emerald-50">
+  <div class="max-w-5xl mx-auto fade-in">
+    <h2 class="section-header green text-4xl font-bold text-green-700 mb-12">Experience in the United States</h2>
+    
+    <div class="space-y-8 mb-12">
+      <!-- UN Work Card -->
+      <div class="bg-white rounded-2xl p-8 card shadow-md border-l-4 border-green-600">
+        <div class="flex items-start gap-3 mb-4">
+          <span class="text-2xl">🇺🇳</span>
+          <div class="flex-1">
+            <p class="text-xl leading-relaxed text-gray-800">
+              After moving to <span class="font-semibold text-green-800">New York</span>, I got involved in work within the <span class="font-bold text-green-900">UN</span>. As part of <span class="font-semibold text-green-800">UNESCO's SDG4 Youth and Student Network</span>, I moderated a panel entitled <span class="italic font-medium text-green-900 bg-green-50 px-2 py-1 rounded">"Driving accountability and leadership: Accelerating gender equality in and through education,"</span> as part of the <span class="font-semibold text-green-800">68th Commission on the Status of Women</span>.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Disarmament & Immigration Card -->
+      <div class="bg-white rounded-2xl p-8 card shadow-md border-l-4 border-green-600">
+        <div class="flex items-start gap-3 mb-4">
+          <div class="flex-1">
+            <p class="text-xl leading-relaxed text-gray-800 mb-5">
+              Last year, I became interested in <span class="font-bold text-green-900">disarmament causes</span>, which is also what led me to intern for the <span class="font-semibold text-green-800">Meeting of State Parties to the Treaty on the Prohibition of Nuclear Weapons (TPNW)</span> last March, as well as become a member of the <span class="font-semibold text-green-800">Youth for TPNW</span>.
+            </p>
+            <div class="border-t border-green-200 pt-5">
+              <p class="text-xl leading-relaxed text-gray-800">
+                Last summer, I interned for <span class="font-bold text-green-900">Immigration Equality</span>, the nation's leading <span class="font-semibold text-green-800">LGBTQ and HIV-positive immigrant rights organization</span>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Current Work Card -->
+      <div class="bg-white rounded-2xl p-8 card shadow-md border-l-4 border-green-600">
+        <div class="flex items-start gap-3 mb-4">
+          <div class="flex-1 space-y-5">
+            <p class="text-xl leading-relaxed text-gray-800">
+              In the present, I'm interning with <span class="font-bold text-green-900">Peace Boat US</span>, international NGO that works to build a culture of <span class="font-semibold text-green-800">peace and sustainability</span> around the world by connecting people across borders and creating opportunities for learning, advocacy and cooperation.
+            </p>
+            
+            <div class="border-t border-green-200 pt-5">
+              <p class="text-xl leading-relaxed text-gray-800">
+                Currently, I organize in <span class="font-semibold text-green-800">New York City</span> and on my university campus for the cause of <span class="font-bold text-green-900">Palestinian liberation</span> and the right to determination of the Palestinian people. I also volunteer with <span class="font-bold text-green-900">Feminist Collages</span>, organization that urges to raise awareness about <span class="font-semibold text-green-800">femicides</span> happening around the world.
+              </p>
+            </div>
+            
+            <div class="mt-6 pt-6 border-t-2 border-green-300 bg-green-50 -mx-8 -mb-8 px-8 py-6 rounded-b-2xl">
+              <p class="text-xl leading-relaxed text-green-900 font-bold">
+                Although these may all sound very different, I fully believe all of our struggles share a lot of common ground, and our solutions are interconnected.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="relative slideshow-container max-w-4xl mx-auto rounded-xl overflow-hidden shadow-2xl" data-folder="green">
+      <button class="absolute left-6 top-1/2 -translate-y-1/2 text-3xl text-white bg-green-600/90 hover:bg-green-700 w-12 h-12 rounded-full shadow-lg z-10 arrow left flex items-center justify-center">&#10094;</button>
+      <img src="" class="w-full active-slide" alt="Experience in USA" style="display: block;" />
+      <button class="absolute right-6 top-1/2 -translate-y-1/2 text-3xl text-white bg-green-600/90 hover:bg-green-700 w-12 h-12 rounded-full shadow-lg z-10 arrow right flex items-center justify-center">&#10095;</button>
+    </div>
+  </div>
+</section>
+
+      <!-- SDGs -->
+      <section id="sdgs" class="py-12 sm:py-16 md:py-20 px-4 sm:px-6 bg-white">
+        <div class="max-w-5xl mx-auto fade-in">
+          <h2 class="section-header blue text-2xl sm:text-3xl md:text-4xl font-bold text-blue-700 mb-8 sm:mb-10 md:mb-12">Experience with the SDGs</h2>
+          <div class="bg-blue-50 rounded-xl sm:rounded-2xl p-6 sm:p-8 mb-8 sm:mb-10 md:mb-12 card">
+            <p class="text-base sm:text-lg md:text-xl leading-relaxed text-gray-800 italic">
+              Content coming soon...
+            </p>
+          </div>
+
+          <div class="relative slideshow-container max-w-4xl mx-auto rounded-xl sm:rounded-2xl overflow-hidden shadow-lg sm:shadow-xl md:shadow-2xl" data-folder="blue">
+            <button class="absolute left-2 sm:left-4 md:left-6 top-1/2 -translate-y-1/2 text-2xl sm:text-3xl text-white bg-blue-600/90 hover:bg-blue-700 w-10 h-10 sm:w-12 sm:h-12 rounded-full shadow-lg z-10 arrow left flex items-center justify-center">&#10094;</button>
+            <img src="" class="w-full h-auto active-slide" alt="SDG Experience" style="display: block;" />
+            <button class="absolute right-2 sm:right-4 md:right-6 top-1/2 -translate-y-1/2 text-2xl sm:text-3xl text-white bg-blue-600/90 hover:bg-blue-700 w-10 h-10 sm:w-12 sm:h-12 rounded-full shadow-lg z-10 arrow right flex items-center justify-center">&#10095;</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact" class="py-20 px-6 bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
+        <div class="max-w-2xl mx-auto fade-in">
+          <h2 class="text-4xl font-bold mb-12 text-center text-gray-900">Get In Touch</h2>
+          <form action="mailto:delia.glavan@gmail.com" method="POST" enctype="text/plain" class="bg-white rounded-2xl p-10 shadow-xl space-y-6">
+            <input type="text" name="name" required placeholder="Your Name" class="w-full border-2 border-gray-200 p-4 rounded-xl transition-all duration-300 outline-none" />
+            <input type="email" name="email" required placeholder="Your Email" class="w-full border-2 border-gray-200 p-4 rounded-xl transition-all duration-300 outline-none" />
+            <textarea name="message" required placeholder="Your Message" rows="5" class="w-full border-2 border-gray-200 p-4 rounded-xl transition-all duration-300 outline-none resize-none"></textarea>
+            <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl">
+              Send Message
+            </button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="text-center text-sm text-gray-500 py-10 bg-gray-100">
+      &copy; 2025 Delia Glavan. All rights reserved.
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+          link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+          });
+        });
+
+        // Slideshow functionality
+        const slideshows = document.querySelectorAll(".slideshow-container");
+
+        slideshows.forEach((container) => {
+          const folder = container.dataset.folder;
+          const imageElement = container.querySelector("img");
+          const leftArrow = container.querySelector(".arrow.left");
+          const rightArrow = container.querySelector(".arrow.right");
+
+          let currentSlide = 0;
+          const images = [];
+          let intervalId;
+
+          const loadImages = async () => {
+            let index = 1;
+
+            while (true) {
+              const imgPath = `images/${folder}/${index}.jpg`;
+              const img = new Image();
+              img.src = imgPath;
+
+              try {
+                await img.decode();
+                images.push(imgPath);
+                index++;
+              } catch (e) {
+                break;
+              }
+            }
+
+            if (images.length > 0) {
+              imageElement.src = images[0];
+              startAutoSlide();
+            } else {
+              imageElement.alt = "No images found";
+              imageElement.style.display = 'none';
+            }
+          };
+
+          const updateSlide = (direction) => {
+            if (images.length === 0) return;
+            currentSlide = (currentSlide + direction + images.length) % images.length;
+            imageElement.style.opacity = '0';
+            setTimeout(() => {
+              imageElement.src = images[currentSlide];
+              imageElement.style.opacity = '1';
+            }, 250);
+          };
+
+          const startAutoSlide = () => {
+            intervalId = setInterval(() => {
+              updateSlide(1);
+            }, 5000);
+          };
+
+          const resetAutoSlide = () => {
+            clearInterval(intervalId);
+            startAutoSlide();
+          };
+
+          leftArrow.addEventListener("click", () => {
+            updateSlide(-1);
+            resetAutoSlide();
+          });
+
+          rightArrow.addEventListener("click", () => {
+            updateSlide(1);
+            resetAutoSlide();
+          });
+
+          loadImages();
+        });
+      });
+    </script>
+  </body>
+</html>
